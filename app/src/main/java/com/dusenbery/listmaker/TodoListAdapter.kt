@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class TodoListAdapter : RecyclerView.Adapter<TodoListViewHolder>() {
 
-    private val todoLists = arrayOf("Android Development", "House Work", "Errands")
+    private val todoLists = arrayOf("Android Development", "House Work", "Errands", "Travel Plans")
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoListViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -19,7 +19,10 @@ class TodoListAdapter : RecyclerView.Adapter<TodoListViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: TodoListViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+        holder.listPositionTextView.text = (position + 1).toString()
+        holder.listTitleTextView.text = todoLists[position]
+
     }
 
 }
