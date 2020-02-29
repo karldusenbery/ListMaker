@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var todoListRecyclerView: RecyclerView
+    private lateinit var todoListRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
         fab.setOnClickListener { _ ->
             val adapter = todoListRecyclerView.adapter as TodoListAdapter
-            adapter.addNewItem()
             showCreateTodoListDialog()
         }
     }
@@ -60,6 +59,8 @@ class MainActivity : AppCompatActivity() {
 
         myDialog.setPositiveButton(positiveButtonTitle) {
             dialog, _ ->
+                val adapter = todoListRecyclerView.adapter as TodoListAdapter
+                adapter.addNewItem(todoTitleEditText.text.toString())
                 dialog.dismiss()
         }
         myDialog.create().show()
