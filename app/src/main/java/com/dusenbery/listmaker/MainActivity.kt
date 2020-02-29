@@ -1,10 +1,12 @@
 package com.dusenbery.listmaker
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.text.InputType
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -23,9 +25,10 @@ class MainActivity : AppCompatActivity() {
         todoListRecyclerView.layoutManager = LinearLayoutManager(this)
         todoListRecyclerView.adapter = TodoListAdapter()
 
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener { _ ->
             val adapter = todoListRecyclerView.adapter as TodoListAdapter
             adapter.addNewItem()
+            showCreateTodoListDialog()
         }
     }
 
@@ -45,7 +48,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun myTestMethod() {
-        println("Hello")
+    private fun showCreateTodoListDialog() {
+        val dialogTitle = getString(R.string.name_of_list)
+        val positiveButtonTitle = getString(R.string.create_list)
+        val myDialog = AlertDialog.Builder(this)
+        val todoTitleEditText = EditText(this)
+        todoTitleEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS
+
+        myDialog.setTitle(dialogTitle)
+        myDialog.setView(todoTitleEditText)
+
+        myDialog.setPositiveButton(positiveButtonTitle) {
+            dialog, _ ->
+                dialog.dismiss()
+        }
+        myDialog.create().show()
     }
 }
