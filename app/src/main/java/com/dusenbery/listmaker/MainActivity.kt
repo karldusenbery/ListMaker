@@ -22,9 +22,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        val lists = listDataManager.readLists()
         todoListRecyclerView = findViewById(R.id.lists_recyclerview)
         todoListRecyclerView.layoutManager = LinearLayoutManager(this)
-        todoListRecyclerView.adapter = TodoListAdapter()
+        todoListRecyclerView.adapter = TodoListAdapter(lists)
 
         fab.setOnClickListener { _ ->
             val adapter = todoListRecyclerView.adapter as TodoListAdapter
@@ -63,7 +64,8 @@ class MainActivity : AppCompatActivity() {
                 val adapter = todoListRecyclerView.adapter as TodoListAdapter
                 val list = TaskList(todoTitleEditText.text.toString())
                 listDataManager.saveList(list)
-                adapter.addNewItem(todoTitleEditText.text.toString())
+                adapter.addList(list)
+
                 dialog.dismiss()
         }
         myDialog.create().show()
