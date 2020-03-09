@@ -1,4 +1,4 @@
-package com.dusenbery.listmaker
+package dev.dusenbery.listmaker
 
 class TaskList(val name: String, val tasks: ArrayList<String> = ArrayList()) {
 

@@ -1,4 +1,4 @@
-package com.dusenbery.listmaker
+package dev.dusenbery.listmaker
 
 import android.os.Bundle
 import android.text.InputType

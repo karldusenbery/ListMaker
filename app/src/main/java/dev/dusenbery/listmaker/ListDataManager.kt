@@ -1,4 +1,4 @@
-package com.dusenbery.listmaker
+package dev.dusenbery.listmaker
 
 import android.content.Context
 import androidx.preference.PreferenceManager

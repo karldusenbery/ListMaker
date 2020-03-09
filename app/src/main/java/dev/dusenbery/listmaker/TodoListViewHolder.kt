@@ -1,4 +1,4 @@
-package com.dusenbery.listmaker
+package dev.dusenbery.listmaker
 
 import android.view.View
 import android.widget.TextView

@@ -1,4 +1,4 @@
-package com.dusenbery.listmaker
+package dev.dusenbery.listmaker
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
