@@ -70,8 +70,8 @@ class MainActivity : AppCompatActivity() {
                 val list = TaskList(todoTitleEditText.text.toString())
                 listDataManager.saveList(list)
                 adapter.addList(list)
-
                 dialog.dismiss()
+                showTaskListItems(list)
         }
         myDialog.create().show()
     }
