@@ -18,7 +18,6 @@ class TodoListFragment : Fragment(), TodoListAdapter.TodoListClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -36,6 +35,7 @@ class TodoListFragment : Fragment(), TodoListAdapter.TodoListClickListener {
         todoListRecyclerView = view.findViewById(R.id.lists_recyclerview)
         todoListRecyclerView.layoutManager = LinearLayoutManager(activity)
         todoListRecyclerView.adapter = TodoListAdapter(lists, this)
+
     }
 
     override fun onAttach(context: Context) {
@@ -52,7 +52,7 @@ class TodoListFragment : Fragment(), TodoListAdapter.TodoListClickListener {
     }
 
     interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+
         fun onTodoListClicked(list: TaskList)
     }
 
@@ -74,12 +74,11 @@ class TodoListFragment : Fragment(), TodoListAdapter.TodoListClickListener {
 
     fun saveList(list: TaskList) {
         listDataManager.saveList(list)
-        updateLists
+        updateLists()
     }
 
     private fun updateLists() {
         val lists = listDataManager.readLists()
         todoListRecyclerView.adapter = TodoListAdapter(lists, this)
-
     }
 }

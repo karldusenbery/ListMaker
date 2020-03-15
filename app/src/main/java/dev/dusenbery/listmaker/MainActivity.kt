@@ -28,9 +28,12 @@ class MainActivity : AppCompatActivity(), TodoListFragment.OnFragmentInteraction
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { _ ->
-            val adapter = todoListRecyclerView.adapter as TodoListAdapter
             showCreateTodoListDialog()
         }
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, todoListFragment)
+            .commit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
