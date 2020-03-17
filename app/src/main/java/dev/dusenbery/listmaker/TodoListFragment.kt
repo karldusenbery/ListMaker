@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_todo_list.*
 
 class TodoListFragment : Fragment(), TodoListAdapter.TodoListClickListener {
@@ -42,6 +44,7 @@ class TodoListFragment : Fragment(), TodoListAdapter.TodoListClickListener {
         todoListRecyclerView.layoutManager = LinearLayoutManager(activity)
         todoListRecyclerView.adapter = TodoListAdapter(lists, this)
 
+        val fab = view.findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener { _ ->
             showCreateTodoListDialog()
         }
@@ -59,7 +62,9 @@ class TodoListFragment : Fragment(), TodoListAdapter.TodoListClickListener {
     }
 
     override fun listItemClicked(list: TaskList) {
-
+        view?.let {
+            it.findNavController().navigate(R.id.action_todoListFragment_to_taskDetailFragment)
+        }
     }
 
     fun addList(list: TaskList) {
