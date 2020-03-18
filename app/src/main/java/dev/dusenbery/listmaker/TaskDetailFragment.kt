@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -18,6 +19,7 @@ class TaskDetailFragment : Fragment() {
     lateinit var list: TaskList
     lateinit var taskListRecyclerView: RecyclerView
     lateinit var addTaskButton: FloatingActionButton
+    lateinit var listDataManager: ListDataManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +49,7 @@ class TaskDetailFragment : Fragment() {
                 showCreateTaskDialog()
             }
         }
+        listDataManager = ViewModelProviders.of(this).get(ListDataManager::class.java)
     }
 
     private fun showCreateTaskDialog() {
