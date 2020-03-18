@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_main.*
 
 class TaskDetailFragment : Fragment() {
 
@@ -20,13 +21,6 @@ class TaskDetailFragment : Fragment() {
     lateinit var taskListRecyclerView: RecyclerView
     lateinit var addTaskButton: FloatingActionButton
     lateinit var listDataManager: ListDataManager
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            list = it.getParcelable(ARG_LIST)!!
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,17 +33,25 @@ class TaskDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        listDataManager = ViewModelProviders.of(this).get(ListDataManager::class.java)
+
+        arguments?.let {
+            val args = TaskDetailFragmentArgs.fromBundle(it)
+            list = listDataManager.readLists().filter { list -> list.name == args.listString }[0]
+        }
+
         activity?.let {
             taskListRecyclerView = view.findViewById(R.id.task_list_recyclerview)
             taskListRecyclerView.layoutManager = LinearLayoutManager(it)
             taskListRecyclerView.adapter = TaskListAdapter(list)
+
+            it.toolbar?.title = list.name
 
             addTaskButton = view.findViewById(R.id.add_task_button)
             addTaskButton.setOnClickListener(){
                 showCreateTaskDialog()
             }
         }
-        listDataManager = ViewModelProviders.of(this).get(ListDataManager::class.java)
     }
 
     private fun showCreateTaskDialog() {
@@ -64,6 +66,7 @@ class TaskDetailFragment : Fragment() {
                         dialog, _ ->
                     val task = taskEditText.text.toString()
                     list.tasks.add(task)
+                    listDataManager.saveList(list)
                     dialog.dismiss()
                 }
                 .create()

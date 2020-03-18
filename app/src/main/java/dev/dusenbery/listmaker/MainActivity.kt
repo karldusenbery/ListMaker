@@ -12,6 +12,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         Navigation.findNavController(this, R.id.nav_host_fragment)
+    }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        toolbar.title = getString(R.string.app_name)
     }
 }
